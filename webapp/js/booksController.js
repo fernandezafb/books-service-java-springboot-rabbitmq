@@ -1,5 +1,8 @@
 app.controller('booksController', function($scope, $http) {
 
+    // This should be refactored to an application property
+    var domainBookService = 'http://localhost:8080';
+
     $scope.addBook = addBook;
     $scope.updateBook = updateBook;
     $scope.deleteBook = deleteBook;
@@ -7,14 +10,14 @@ app.controller('booksController', function($scope, $http) {
     loadBooks();
 
     function loadBooks() {
-        $http.get('/books').then(function(response) {
+        $http.get(domainBookService + '/books').then(function(response) {
             $scope.books = response.data._embedded.books;
         });
     }
     
     function addBook() {
         var jsonData = '{"isbn": "' + $scope.inputIsbn + ' ", "description": "' + $scope.inputDescription + '"}';
-        $http.post('/books', jsonData).then(function() {
+        $http.post(domainBookService + '/books', jsonData).then(function() {
             loadBooks();
             $scope.inputIsbn = $scope.inputDescription = "";
         });
