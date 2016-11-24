@@ -1,0 +1,49 @@
+### Package Files ###
+*.jar
+*.war
+*.ear
+
+### Main ###
+local.properties
+
+### Gradle ###
+.gradle
+/build/
+gradle.properties
+gradle-app.setting
+.gradletasknamecache
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Database H2 ###
+/appdata/
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### OSX ###
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+### Windows ###
+Thumbs.db
+Desktop.ini
