@@ -1,0 +1,52 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.2.RELEASE'
+		springLoadedVersion = '1.2.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.springframework:springloaded:${springLoadedVersion}")
+	}
+}
+
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'book-service'
+	version = '0.0.1-SNAPSHOT'
+}
+
+mainClassName = 'com.book.service.Application'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+applicationDefaultJvmArgs = [  
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"  
+]
+
+idea {  
+    module {  
+        inheritOutputDirs = false  
+        outputDir = file("$buildDir/classes/main/")  
+    }
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('com.h2database:h2')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}

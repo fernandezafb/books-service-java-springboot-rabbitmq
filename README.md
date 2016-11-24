@@ -1,0 +1,1 @@
+Example application using Spring Data Rest with HATEOAS endpoints and RabbitMQ as a message broker
