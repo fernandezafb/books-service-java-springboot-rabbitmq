@@ -1,4 +1,4 @@
-package com.book.service.domain;
+package com.book.service.book;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -16,9 +16,9 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long Id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String isbn;
 
     @Column
@@ -29,11 +29,11 @@ public class Book {
     private Timestamp created;
 
     public long getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long Id) {
+        this.Id = Id;
     }
 
     public String getIsbn() {

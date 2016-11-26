@@ -1,7 +1,7 @@
 app.controller('booksController', function($scope, $http) {
 
     // This should be refactored to an application property
-    var domainBookService = 'http://localhost:8080';
+    var domainBookService = 'http://localhost:9000';
 
     $scope.addBook = addBook;
     $scope.updateBook = updateBook;

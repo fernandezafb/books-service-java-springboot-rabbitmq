@@ -18,7 +18,7 @@ public class Application {
     }
 
     @Bean
-    public FilterRegistrationBean registerCorsFilter() {
+    public FilterRegistrationBean registerCORSFilter() {
         final FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new CORSFilter());
 
