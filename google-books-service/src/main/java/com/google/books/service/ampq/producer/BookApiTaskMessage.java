@@ -11,6 +11,9 @@ public class BookApiTaskMessage {
     private String isbn;
     private String description;
 
+    public BookApiTaskMessage() {
+    }
+
     public BookApiTaskMessage(long id, String isbn, String description) {
         this.id = id;
         this.isbn = isbn;

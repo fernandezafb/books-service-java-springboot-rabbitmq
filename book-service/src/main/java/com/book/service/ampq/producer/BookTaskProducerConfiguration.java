@@ -1,5 +1,6 @@
 package com.book.service.ampq.producer;
 
+import com.book.service.ampq.MessageQueue;
 import com.book.service.ampq.RabbitMqConfiguration;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -14,23 +15,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BookTaskProducerConfiguration extends RabbitMqConfiguration {
 
-    private final String tasksQueue = "tasks.queue";
-
-    public String getTasksQueue() {
-        return tasksQueue;
-    }
+    private final String tasksQueue = MessageQueue.TASKS_QUEUE;
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
-        template.setRoutingKey(this.tasksQueue);
-        template.setQueue(this.tasksQueue);
-        template.setMessageConverter(jsonMessageConverter());
+        template.setRoutingKey(tasksQueue);
+        template.setQueue(tasksQueue);
+        template.setMessageConverter(jsonMessageConverterProducer());
         return template;
     }
 
     @Bean
     public Queue tasksQueue() {
-        return new Queue(this.tasksQueue);
+        return new Queue(tasksQueue);
     }
 }

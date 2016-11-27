@@ -10,6 +10,9 @@ public class BookTaskMessage {
     private long id;
     private String isbn;
 
+    public BookTaskMessage() {
+    }
+
     public BookTaskMessage(long id, String isbn) {
         this.id = id;
         this.isbn = isbn;

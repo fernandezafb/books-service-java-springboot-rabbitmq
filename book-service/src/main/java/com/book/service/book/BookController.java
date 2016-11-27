@@ -18,9 +18,9 @@ public class BookController {
     private BookTaskProducer bookTaskProducer;
 
     @GetMapping("/update/description/book")
-    public String updateBookDescription(@RequestParam("id") long id,
-                                        @RequestParam("isbn") String isbn) {
+    public BookUpdateDescriptionResponse updateBookDescription(@RequestParam("id") long id,
+                                                               @RequestParam("isbn") String isbn) {
         bookTaskProducer.sendNewUpdateBookDescriptionTask(new BookTaskMessage(id, isbn));
-        return "OK";
+        return new BookUpdateDescriptionResponse(BookUpdateDescriptionResponse.SUCCESS, isbn);
     }
 }

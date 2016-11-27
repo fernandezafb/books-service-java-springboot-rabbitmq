@@ -25,8 +25,8 @@ app.controller('booksController', function($scope, $http) {
     }
 
     function syncBook(book) {
-        $http.get(domainBookService + '/update/description/book?id=' + book.id + '&isbn=' + book.isbn).then(function() {
-            loadBooks();
+        var queryParams = '?id=' + book.id + '&isbn=' + book.isbn;
+        $http.get(domainBookService + '/update/description/book' + queryParams).then(function() {
         });
     }
 

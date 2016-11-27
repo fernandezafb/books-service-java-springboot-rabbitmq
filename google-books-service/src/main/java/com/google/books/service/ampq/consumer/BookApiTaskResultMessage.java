@@ -10,6 +10,7 @@ public class BookApiTaskResultMessage {
     private long id;
     private String isbn;
 
+    // Default constructor is needed to deserialize JSON
     public BookApiTaskResultMessage() {
     }
 

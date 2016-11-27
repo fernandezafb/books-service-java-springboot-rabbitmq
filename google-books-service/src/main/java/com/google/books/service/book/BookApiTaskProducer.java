@@ -1,5 +1,6 @@
 package com.google.books.service.book;
 
+import com.google.books.service.ampq.MessageQueue;
 import com.google.books.service.ampq.producer.BookApiTaskMessage;
 import com.google.books.service.ampq.producer.BookApiTaskProducerConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,6 @@ public class BookApiTaskProducer {
 
     public void sendUpdatedBook(BookApiTaskMessage taskMessage) {
         bookApiTaskProducerConfiguration.rabbitTemplate()
-                .convertAndSend(bookApiTaskProducerConfiguration.getTasksResultQueue(), taskMessage);
+                .convertAndSend(MessageQueue.TASKS_RESULT_QUEUE, taskMessage);
     }
 }
