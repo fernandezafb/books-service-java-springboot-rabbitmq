@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * BookService.
+ * Producer of tasks that are sent to the tasks queue.
  *
  * @author afernandez
  */

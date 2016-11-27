@@ -1,5 +1,7 @@
-package com.google.books.service;
+package com.google.books.service.book;
 
+import com.google.books.service.BookDescriptionUpdaterTestConfiguration;
+import com.google.books.service.book.BookDescriptionUpdater;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

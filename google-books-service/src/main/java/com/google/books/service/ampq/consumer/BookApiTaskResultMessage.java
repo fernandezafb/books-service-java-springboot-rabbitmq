@@ -1,16 +1,19 @@
-package com.book.service.ampq.producer;
+package com.google.books.service.ampq.consumer;
 
 /**
- * Message to send book data to the queue.
+ * The messaged received in the consumer.
  *
  * @author afernandez
  */
-public class BookTaskMessage {
+public class BookApiTaskResultMessage {
 
     private long id;
     private String isbn;
 
-    public BookTaskMessage(long id, String isbn) {
+    public BookApiTaskResultMessage() {
+    }
+
+    public BookApiTaskResultMessage(long id, String isbn) {
         this.id = id;
         this.isbn = isbn;
     }

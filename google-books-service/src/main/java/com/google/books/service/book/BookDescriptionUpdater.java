@@ -1,4 +1,4 @@
-package com.google.books.service;
+package com.google.books.service.book;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

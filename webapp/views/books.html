@@ -39,6 +39,9 @@
         <td><span>{{ book.created }}</span></td>
         <td><input style="width: 100%" ng-model="book.description"/></td>
         <td>
+            <button type="button" class="btn btn-default btn-sm" ng-click="syncBook(book)">Sync</button>
+        </td>
+        <td>
             <button type="button" class="btn btn-default btn-sm" ng-click="updateBook(book)">Update</button>
         </td>
         <td>

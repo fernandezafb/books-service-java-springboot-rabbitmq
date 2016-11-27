@@ -3,7 +3,8 @@ app.controller('booksController', function($scope, $http) {
     // This should be refactored to an application property
     var domainBookService = 'http://localhost:9000';
 
-    $scope.addBook = addBook;
+    $scope.addBook    = addBook;
+    $scope.syncBook   = syncBook;
     $scope.updateBook = updateBook;
     $scope.deleteBook = deleteBook;
 
@@ -20,6 +21,12 @@ app.controller('booksController', function($scope, $http) {
         $http.post(domainBookService + '/books', jsonData).then(function() {
             loadBooks();
             $scope.inputIsbn = $scope.inputDescription = "";
+        });
+    }
+
+    function syncBook(book) {
+        $http.get(domainBookService + '/update/description/book?id=' + book.id + '&isbn=' + book.isbn).then(function() {
+            loadBooks();
         });
     }
 
