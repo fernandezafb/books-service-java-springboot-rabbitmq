@@ -1,6 +1,8 @@
 package com.book.service.ampq;
 
 import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Exchange;
+import org.springframework.amqp.core.ExchangeBuilder;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -28,6 +30,14 @@ public class RabbitMqConfiguration {
     @Bean
     public AmqpAdmin amqpAdmin() {
         return new RabbitAdmin(connectionFactory());
+    }
+
+    @Bean
+    public Exchange exchange() {
+        return ExchangeBuilder.directExchange(MessageQueue.DELAYED_EXCHANGE)
+                .durable()
+                .delayed()
+                .build();
     }
 
     @Bean

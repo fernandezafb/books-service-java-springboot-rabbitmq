@@ -19,4 +19,3 @@ function config($stateProvider, $urlRouterProvider, $httpProvider) {
 
 function run($rootScope, $location) {
 }
-

@@ -3,6 +3,7 @@ package com.google.books.service.ampq.consumer;
 import com.google.books.service.ampq.MessageQueue;
 import com.google.books.service.ampq.RabbitMqConfiguration;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,9 @@ public class BookApiTaskConsumerConfiguration extends RabbitMqConfiguration {
 
     @Bean
     public Queue tasksQueue() {
-        return new Queue(tasksQueue);
+        return QueueBuilder.durable(tasksQueue)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", MessageQueue.TASKS_DELAYED_QUEUE)
+                .build();
     }
 }
