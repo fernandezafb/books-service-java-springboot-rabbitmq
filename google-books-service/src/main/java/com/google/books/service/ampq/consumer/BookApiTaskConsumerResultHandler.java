@@ -7,9 +7,14 @@ import com.google.books.service.book.BookDescriptionUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Listener implementation to handle the received message.
@@ -37,7 +42,8 @@ public class BookApiTaskConsumerResultHandler {
     }
 
     @RabbitListener(queues = MessageQueue.TASKS_DELAYED_QUEUE)
-    public void receiveDelayedMessage(final BookApiTaskResultMessage resultMessage) {
-        bookApiTaskProducer.sendDelayedUpdatedBook(resultMessage);
+    public void receiveDelayedMessage(@Header(required = false, name = "x-death") List<HashMap<String, Object>> xDeathHeader, Message message,
+                                      BookApiTaskResultMessage payload) {
+        bookApiTaskProducer.sendDelayedUpdatedBook(xDeathHeader, message, payload);
     }
 }
