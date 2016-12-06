@@ -14,14 +14,13 @@ buildscript {
 
 apply plugin: 'idea'
 apply plugin: 'application'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
 	baseName = 'book-service'
 	version = '0.0.1-SNAPSHOT'
 }
 
-mainClassName = 'com.book.service.Application'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
