@@ -1,11 +1,6 @@
 package com.google.books.service.ampq;
 
-import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,20 +13,34 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMqConfiguration {
 
     @Bean
-    public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
-        return connectionFactory;
+    Exchange exchange() {
+        return ExchangeBuilder.directExchange(MessageQueue.DELAYED_EXCHANGE)
+                .durable()
+                .delayed()
+                .build();
     }
 
     @Bean
-    public AmqpAdmin amqpAdmin() {
-        return new RabbitAdmin(connectionFactory());
+    Queue tasksQueue() {
+        return QueueBuilder.durable(MessageQueue.TASKS_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", MessageQueue.TASKS_DELAYED_QUEUE)
+                .build();
     }
 
     @Bean
-    public MessageConverter jsonMessageConverterProducer() {
-        return new Jackson2JsonMessageConverter();
+    Queue tasksResultQueue() {
+        return new Queue(MessageQueue.TASKS_RESULT_QUEUE);
+    }
+
+    @Bean
+    Queue tasksDelayedQueue() {
+        return QueueBuilder.durable(MessageQueue.TASKS_DELAYED_QUEUE)
+                .build();
+    }
+
+    @Bean
+    Binding binding() {
+        return BindingBuilder.bind(tasksQueue()).to((DirectExchange) exchange()).with(MessageQueue.TASKS_QUEUE);
     }
 }

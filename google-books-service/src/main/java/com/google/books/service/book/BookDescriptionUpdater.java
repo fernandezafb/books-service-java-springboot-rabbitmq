@@ -34,6 +34,7 @@ public class BookDescriptionUpdater {
      */
     public String updateDescriptionFromIsbn(String isbn) {
         final URI uri = UriComponentsBuilder.fromUriString(String.format(googleBooksUri, isbn))
+                .queryParam("country", "NL")
                 .build()
                 .encode()
                 .toUri();

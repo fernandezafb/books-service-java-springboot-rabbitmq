@@ -44,6 +44,7 @@ public class BookApiTaskConsumerResultHandler {
     @RabbitListener(queues = MessageQueue.TASKS_DELAYED_QUEUE)
     public void receiveDelayedMessage(@Header(required = false, name = "x-death") List<HashMap<String, Object>> xDeathHeader, Message message,
                                       BookApiTaskResultMessage payload) {
+        logger.debug("Thread name: {}", Thread.currentThread().getName());
         bookApiTaskProducer.sendDelayedUpdatedBook(xDeathHeader, message, payload);
     }
 }
