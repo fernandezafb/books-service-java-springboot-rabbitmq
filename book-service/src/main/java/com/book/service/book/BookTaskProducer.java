@@ -2,7 +2,7 @@ package com.book.service.book;
 
 import com.book.service.ampq.MessageQueue;
 import com.book.service.ampq.producer.BookTaskMessage;
-import com.book.service.ampq.producer.BookTaskProducerConfiguration;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +15,9 @@ import org.springframework.stereotype.Component;
 public class BookTaskProducer {
 
     @Autowired
-    private BookTaskProducerConfiguration bookTaskProducerConfiguration;
+    private RabbitTemplate rabbitTemplate;
 
     public void sendNewUpdateBookDescriptionTask(BookTaskMessage bookTaskMessage) {
-        bookTaskProducerConfiguration.rabbitTemplate()
-                .convertAndSend(MessageQueue.TASKS_QUEUE, bookTaskMessage);
+        rabbitTemplate.convertAndSend(MessageQueue.TASKS_QUEUE, bookTaskMessage);
     }
 }

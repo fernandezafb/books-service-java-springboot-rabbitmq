@@ -3,9 +3,9 @@ package com.google.books.service.book;
 import com.google.books.service.ampq.MessageQueue;
 import com.google.books.service.ampq.consumer.BookApiTaskResultMessage;
 import com.google.books.service.ampq.producer.BookApiTaskMessage;
-import com.google.books.service.ampq.producer.BookApiTaskProducerConfiguration;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,16 +24,14 @@ public class BookApiTaskProducer {
     private static final Long MAX_RETRIES = 30L;
 
     @Autowired
-    private BookApiTaskProducerConfiguration bookApiTaskProducerConfiguration;
+    private RabbitTemplate rabbitTemplate;
 
     public void sendUpdatedBook(BookApiTaskMessage taskMessage) {
-        bookApiTaskProducerConfiguration.rabbitTemplate()
-                .convertAndSend(MessageQueue.TASKS_RESULT_QUEUE, taskMessage);
+        rabbitTemplate.convertAndSend(MessageQueue.TASKS_RESULT_QUEUE, taskMessage);
     }
 
     public void sendDelayedUpdatedBook(List<HashMap<String, Object>> xDeathHeader, Message message, BookApiTaskResultMessage taskMessage) {
-        bookApiTaskProducerConfiguration.rabbitTemplate()
-                .convertAndSend(MessageQueue.DELAYED_EXCHANGE, MessageQueue.TASKS_QUEUE, taskMessage,
+        rabbitTemplate.convertAndSend(MessageQueue.DELAYED_EXCHANGE, MessageQueue.TASKS_QUEUE, taskMessage,
                         msg -> postProcessMessage(xDeathHeader, message));
     }
 

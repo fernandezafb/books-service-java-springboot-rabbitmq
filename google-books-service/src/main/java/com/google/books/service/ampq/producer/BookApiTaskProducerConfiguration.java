@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @author afernandez
  */
 @Configuration
-public class BookApiTaskProducerConfiguration extends RabbitMqConfiguration {
+public class BookApiTaskProducerConfiguration {
 
     @Autowired
     private ConnectionFactory cachingConnectionFactory;

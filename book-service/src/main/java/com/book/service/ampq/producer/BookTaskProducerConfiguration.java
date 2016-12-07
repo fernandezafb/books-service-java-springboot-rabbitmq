@@ -1,7 +1,6 @@
 package com.book.service.ampq.producer;
 
 import com.book.service.ampq.MessageQueue;
-import com.book.service.ampq.RabbitMqConfiguration;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -16,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @author afernandez
  */
 @Configuration
-public class BookTaskProducerConfiguration extends RabbitMqConfiguration {
+public class BookTaskProducerConfiguration {
 
     @Autowired
     private ConnectionFactory cachingConnectionFactory;
