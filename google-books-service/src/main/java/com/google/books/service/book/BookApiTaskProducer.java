@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 public class BookApiTaskProducer {
 
-    private static final int INITIAL_DELAY = 3000;
+    private static final int INITIAL_DELAY = 1000;
     private static final Long MAX_RETRIES = 30L;
 
     @Autowired
@@ -47,7 +47,7 @@ public class BookApiTaskProducer {
         if (delay == null) {
             message.getMessageProperties().setDelay(INITIAL_DELAY);
         } else {
-            message.getMessageProperties().setDelay(INITIAL_DELAY);
+            message.getMessageProperties().setDelay(Math.abs(delay * 2));
         }
     }
 
